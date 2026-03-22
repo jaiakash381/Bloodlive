@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Link - Save Lives</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-heartbeat text-primary"></i>
+                <span style="color: black;">Red</span><span class="text-primary">Link</span>
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/find-blood.html">Find Blood</a></li>
+                <li><a href="pages/donor.html">Donate</a></li>
+                <li><a href="pages/emergency.html" style="color: var(--danger); font-weight: bold;">Emergency Request</a></li>
+                <li><a href="pages/inventory.html">Blood Bank</a></li>
+                <li><a href="pages/awareness.html">Awareness</a></li>
+                <li><button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.8rem;">EN/TA</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero section-padding" style="background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&q=80'); background-size: cover; background-position: center;">
+        <div class="container text-center animate">
+            <h1 style="font-size: 3rem; margin-bottom: 1rem; color: var(--primary-dark);">Donate Blood, <span style="color: var(--text-dark);">Save Lives</span></h1>
+            <p style="font-size: 1.25rem; color: var(--text-light); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Join our community of heroes. Find blood donors near you or register to save a life today. 
+                Every drop counts.
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="pages/find-blood.html" class="btn btn-primary">Find Blood</a>
+                <a href="pages/donor.html" class="btn btn-outline">Become a Donor</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Stats Section -->
+    <section class="section-padding" style="background-color: white;">
+        <div class="container">
+            <div class="grid-3 text-center">
+                <div class="card id-stats-card">
+                    <i class="fas fa-users text-primary" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h2 id="total-donors">25+</h2>
+                    <p>Active Donors</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-hospital text-primary" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h2 id="total-banks">10+</h2>
+                    <p>Connected Blood Banks</p>
+                </div>
+                <div class="card" style="border: 1px solid var(--danger);">
+                    <i class="fas fa-ambulance text-danger" style="font-size: 2.5rem; margin-bottom: 1rem;"></i>
+                    <h2 id="active-requests" class="text-danger">5</h2>
+                    <p>Live Emergency Requests</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features/Info -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center mb-1">
+                <h2 style="margin-bottom: 0.5rem;">How It Works</h2>
+                <p>Simple steps to save a life</p>
+            </div>
+            <div class="grid-3" style="margin-top: 3rem;">
+                <div class="card text-center">
+                    <div style="width: 60px; height: 60px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">1</span>
+                    </div>
+                    <h3>Register</h3>
+                    <p style="margin-top: 1rem; color: var(--text-light);">Sign up as a donor in less than 2 minutes. It's safe and easy.</p>
+                </div>
+                <div class="card text-center">
+                    <div style="width: 60px; height: 60px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">2</span>
+                    </div>
+                    <h3>Get Notified</h3>
+                    <p style="margin-top: 1rem; color: var(--text-light);">Receive alerts when someone nearby needs your blood type.</p>
+                </div>
+                <div class="card text-center">
+                    <div style="width: 60px; height: 60px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;">
+                        <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">3</span>
+                    </div>
+                    <h3>Save a Life</h3>
+                    <p style="margin-top: 1rem; color: var(--text-light);">Visit the hospital or blood bank and donate. Be a hero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>RedLink</h3>
+                    <p class="mt-1" style="color: var(--text-light);">Connecting donors, patients, and hospitals to save lives efficiently.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RedLink. Student Demo Project. Not for real medical use.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Update stats from mock data
+        document.addEventListener('DOMContentLoaded', () => {
+            const donors = DataManager.getDonors();
+            const requests = DataManager.getRequests();
+            const banks = DataManager.getBanks();
+
+            document.getElementById('total-donors').textContent = donors.length + '+';
+            document.getElementById('active-requests').textContent = requests.length;
+            document.getElementById('total-banks').textContent = banks.length + '+';
+        });
+    </script>
+</body>
+</html>

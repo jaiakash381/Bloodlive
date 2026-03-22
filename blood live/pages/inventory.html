@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Banks - RedLink</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-heartbeat text-primary"></i>
+                <span style="color: black;">Red</span><span class="text-primary">Link</span>
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="find-blood.html">Find Blood</a></li>
+                <li><a href="donor.html">Donate</a></li>
+                <li><a href="emergency.html" style="color: var(--danger); font-weight: bold;">Emergency Request</a></li>
+                <li><a href="inventory.html" class="active">Blood Bank</a></li>
+                <li><a href="awareness.html">Awareness</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container section-padding">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div>
+                <h1>Blood Banks & Inventory</h1>
+                <p style="color: var(--text-light);">Live stock status of blood banks near you.</p>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0;">
+                <select id="city-select" class="form-control" onchange="renderBanks()">
+                    <option value="all">All Cities</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Coimbatore">Coimbatore</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="banks-grid" class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        function renderBanks() {
+            const cityFilter = document.getElementById('city-select').value;
+            const banks = DataManager.getBanks();
+            const grid = document.getElementById('banks-grid');
+            grid.innerHTML = '';
+
+            const filtered = cityFilter === 'all' ? banks : banks.filter(b => b.city === cityFilter);
+
+            filtered.forEach(bank => {
+                const card = document.createElement('div');
+                card.className = 'card animate';
+
+                let stockHtml = '<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-top: 1rem;">';
+                for (const [bg, count] of Object.entries(bank.stock)) {
+                    const color = count < 5 ? 'var(--danger)' : 'var(--success)';
+                    const bgClass = count < 5 ? '#FFEBEE' : '#E8F5E9';
+                    stockHtml += `
+                        <div style="text-align: center; padding: 0.5rem; background: ${bgClass}; border-radius: 4px;">
+                            <span style="display: block; font-weight: bold; color: ${color};">${bg}</span>
+                            <span style="font-size: 0.8rem;">${count} units</span>
+                        </div>
+                    `;
+                }
+                stockHtml += '</div>';
+
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: start;">
+                        <div>
+                            <h3>${bank.name}</h3>
+                            <p style="color: var(--text-light);"><i class="fas fa-map-marker-alt"></i> ${bank.city}</p>
+                        </div>
+                        <span style="background: var(--secondary); color: var(--primary); padding: 0.25rem 0.5rem; font-size: 0.8rem; border-radius: 4px;">Verified</span>
+                    </div>
+                    
+                    <h4 class="mt-1" style="font-size: 0.9rem; color: #555;">Live Stock Status:</h4>
+                    ${stockHtml}
+
+                    <div class="mt-1" style="display: flex; gap: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <button onclick="bookAppointment('${bank.name}')" class="btn btn-primary" style="flex: 1;">Book Appointment</button>
+                        <a href="https://maps.google.com/?q=${bank.name} ${bank.city}" target="_blank" class="btn btn-outline" style="flex: 1;"><i class="fas fa-directions"></i> Navigate</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function bookAppointment(bankName) {
+            // Simple prompt for demo
+            const date = prompt(`Book appointment at ${bankName}\nEnter date (YYYY-MM-DD):`, new Date().toISOString().split('T')[0]);
+            if (date) {
+                showToast(`Appointment booked for ${date} at ${bankName}`);
+            }
+        }
+
+        renderBanks();
+    </script>
+</body>
+
+</html>

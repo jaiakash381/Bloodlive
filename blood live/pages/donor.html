@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Blood - RedLink</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .donor-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        .eligibility-card {
+            background: #E3F2FD;
+            border-left: 5px solid #2196F3;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-heartbeat text-primary"></i>
+                <span style="color: black;">Red</span><span class="text-primary">Link</span>
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="find-blood.html">Find Blood</a></li>
+                <li><a href="donor.html" class="active">Donate</a></li>
+                <li><a href="emergency.html" style="color: var(--danger); font-weight: bold;">Emergency Request</a></li>
+                <li><a href="inventory.html">Blood Bank</a></li>
+                <li><a href="awareness.html">Awareness</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container section-padding">
+
+        <div class="donor-tabs">
+            <button class="tab-btn active" onclick="switchTab('register')">New Registration</button>
+            <button class="tab-btn" onclick="switchTab('profile')">Donor Profile</button>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="register" class="section-content active">
+            <h2 class="text-center mb-1">Become a Donor</h2>
+            <p class="text-center" style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-light);">Join our
+                community of lifesavers. Please fill out your details accurately.</p>
+
+            <form id="donor-form" class="card" style="max-width: 600px; margin: 0 auto;">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" name="name" required placeholder="John Doe">
+                </div>
+
+                <div class="grid-3" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Age</label>
+                        <input type="number" class="form-control" name="age" min="18" max="65" required
+                            placeholder="18-65">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Weight (kg)</label>
+                        <input type="number" class="form-control" name="weight" min="45" required
+                            placeholder="Min 45kg">
+                    </div>
+                </div>
+
+                <div class="grid-3" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Blood Group</label>
+                        <select class="form-control" name="bloodGroup" required>
+                            <option value="">Select</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">City</label>
+                        <select class="form-control" name="city" required>
+                            <option value="">Select City</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Madurai">Madurai</option>
+                            <option value="Salem">Salem</option>
+                            <option value="Trichy">Trichy</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" name="phone" pattern="[0-9]{10}" required
+                        placeholder="10-digit mobile number">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Last Donation Date (Optional)</label>
+                    <input type="date" class="form-control" name="lastDonation">
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="emergency" name="emergency" checked>
+                    <label for="emergency">Willing to donate in emergency?</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register as Donor</button>
+            </form>
+        </div>
+
+        <!-- Donor Profile -->
+        <div id="profile" class="section-content">
+            <div id="profile-container" style="max-width: 800px; margin: 0 auto; display: none;">
+                <div class="card mb-1">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h2 id="p-name">John Doe</h2>
+                            <p id="p-location" style="color: var(--text-light);"><i class="fas fa-map-marker-alt"></i>
+                                Chennai</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <span id="p-bg"
+                                style="display: inline-block; background: var(--secondary); color: var(--primary); font-size: 2rem; font-weight: bold; padding: 0.5rem 1rem; border-radius: var(--radius);">A+</span>
+                        </div>
+                    </div>
+
+                    <div class="grid-3 mt-1" style="border-top: 1px solid #eee; padding-top: 1rem;">
+                        <div>
+                            <strong>Age:</strong> <span id="p-age">25</span>
+                        </div>
+                        <div>
+                            <strong>Weight:</strong> <span id="p-weight">70</span>kg
+                        </div>
+                        <div>
+                            <strong>Phone:</strong> <span id="p-phone">******3210</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="eligibility-box" class="eligibility-card">
+                    <h3><i class="fas fa-check-circle"></i> You are Eligible to Donate!</h3>
+                    <p>It has been more than 90 days since your last donation.</p>
+                </div>
+
+                <h3 class="mt-1 mb-1">Donation History (Mock)</h3>
+                <div class="card">
+                    <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #eee;">
+                                <th style="padding: 0.5rem;">Date</th>
+                                <th style="padding: 0.5rem;">Hospital</th>
+                                <th style="padding: 0.5rem;">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-list">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Login Mock -->
+            <div id="login-container" class="card text-center" style="max-width: 400px; margin: 0 auto;">
+                <h3>View Your Profile</h3>
+                <p class="mb-1">Enter your phone number to login</p>
+                <input type="tel" id="login-phone" class="form-control mb-1" placeholder="Mobile Number">
+                <button onclick="loginMock()" class="btn btn-primary" style="width: 100%;">Login</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.section-content').forEach(c => c.classList.remove('active'));
+
+            document.querySelector(`button[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        // Handle Registration
+        document.getElementById('donor-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const donor = Object.fromEntries(formData.entries());
+
+            // Calculate Eligibility (Mock logic)
+            donor.available = true;
+            if (donor.lastDonation) {
+                const dayDiff = (new Date() - new Date(donor.lastDonation)) / (1000 * 60 * 60 * 24);
+                if (dayDiff < 90) donor.available = false;
+            }
+
+            DataManager.addDonor(donor);
+            showToast('Registration Successful! Welcome to RedLink.');
+            e.target.reset();
+
+            // Auto switch to profile logic simulation
+            localStorage.setItem('currentUserPhone', donor.phone);
+            switchTab('profile');
+            checkLogin();
+        });
+
+        // Mock Login
+        function loginMock() {
+            const phone = document.getElementById('login-phone').value;
+            const donors = DataManager.getDonors();
+            const user = donors.find(d => d.phone === phone);
+
+            if (user) {
+                localStorage.setItem('currentUserPhone', phone);
+                checkLogin();
+            } else {
+                showToast('User not found! Please register first.', 'error');
+            }
+        }
+
+        function checkLogin() {
+            const phone = localStorage.getItem('currentUserPhone');
+            if (phone) {
+                const donors = DataManager.getDonors();
+                const user = donors.find(d => d.phone === phone);
+                if (user) renderProfile(user);
+            }
+        }
+
+        function renderProfile(user) {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('profile-container').style.display = 'block';
+
+            document.getElementById('p-name').textContent = user.name;
+            document.getElementById('p-location').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${user.city}`;
+            document.getElementById('p-bg').textContent = user.bloodGroup;
+            document.getElementById('p-age').textContent = user.age;
+            document.getElementById('p-weight').textContent = user.weight;
+            document.getElementById('p-phone').textContent = user.phone;
+
+            // Eligibility
+            const elBox = document.getElementById('eligibility-box');
+            if (user.available) {
+                elBox.className = 'eligibility-card';
+                elBox.style.background = '#E3F2FD';
+                elBox.style.borderLeftColor = '#2196F3';
+                elBox.innerHTML = `<h3><i class="fas fa-check-circle"></i> Eligible to Donate</h3><p>You are ready to save a life today!</p>`;
+            } else {
+                elBox.style.background = '#FFEBEE';
+                elBox.style.borderLeftColor = '#D32F2F';
+                elBox.innerHTML = `<h3><i class="fas fa-user-clock"></i> Waiting Period</h3><p>Last donation was less than 90 days ago.</p>`;
+            }
+
+            // Mock History
+            const historyList = document.getElementById('history-list');
+            if (user.lastDonation) {
+                historyList.innerHTML = `
+                    <tr>
+                        <td style="padding: 0.5rem;">${user.lastDonation}</td>
+                        <td style="padding: 0.5rem;">General Hospital, ${user.city}</td>
+                        <td style="padding: 0.5rem;"><span style="color: green;">Completed</span></td>
+                    </tr>
+                `;
+            } else {
+                historyList.innerHTML = '<tr><td colspan="3" class="text-center" style="padding: 1rem;">No prior donations recorded.</td></tr>';
+            }
+        }
+
+        // Check login on load
+        checkLogin();
+    </script>
+</body>
+
+</html>

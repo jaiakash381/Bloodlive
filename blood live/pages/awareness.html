@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awareness - RedLink</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .faq-item {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-heartbeat text-primary"></i>
+                <span style="color: black;">Red</span><span class="text-primary">Link</span>
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="find-blood.html">Find Blood</a></li>
+                <li><a href="donor.html">Donate</a></li>
+                <li><a href="emergency.html" style="color: var(--danger); font-weight: bold;">Emergency Request</a></li>
+                <li><a href="inventory.html">Blood Bank</a></li>
+                <li><a href="awareness.html" class="active">Awareness</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container section-padding">
+        <h1 class="text-center mb-1">Why Donate Blood?</h1>
+        <p class="text-center" style="max-width: 600px; margin: 0 auto 3rem; color: var(--text-light);">
+            Blood donation is a selfless act that saves millions of lives every year.
+            Here are some facts to help you understand the impact.
+        </p>
+
+        <div class="grid-3 mb-1">
+            <div class="card text-center">
+                <i class="fas fa-heart text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h3>Save Lives</h3>
+                <p class="mt-1">One pint of blood can save up to three lives.</p>
+            </div>
+            <div class="card text-center">
+                <i class="fas fa-capsules text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h3>Health Check</h3>
+                <p class="mt-1">Get a free mini-physical and check your pulse, blood pressure, and hemoglobin.</p>
+            </div>
+            <div class="card text-center">
+                <i class="fas fa-smile text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <h3>Did You Know?</h3>
+                <p class="mt-1">Someone needs blood every two seconds in India.</p>
+            </div>
+        </div>
+
+        <h2 class="text-center mb-1 mt-1">Myths vs Facts</h2>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Myth: Donating blood hurts a lot.</span>
+                    <i class="fas fa-chevron-down text-primary"></i>
+                </div>
+                <div class="faq-answer">
+                    <strong>Fact:</strong> You may feel a slight prick of the needle, but the process is largely
+                    painless. The satisfaction of saving a life outweighs the momentary discomfort.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Myth: I will get weak after donating blood.</span>
+                    <i class="fas fa-chevron-down text-primary"></i>
+                </div>
+                <div class="faq-answer">
+                    <strong>Fact:</strong> A healthy adult recovers quickly. The fluid volume is replaced within 24
+                    hours, and red blood cells are regenerated within a few weeks. You can resume normal activities
+                    almost immediately.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Myth: I can contract diseases by donating.</span>
+                    <i class="fas fa-chevron-down text-primary"></i>
+                </div>
+                <div class="faq-answer">
+                    <strong>Fact:</strong> No. Sterile, disposable needles are used for every donor. There is zero risk
+                    of contracting HIV or other infections from the donation process itself.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Myth: Vegetarians cannot donate blood.</span>
+                    <i class="fas fa-chevron-down text-primary"></i>
+                </div>
+                <div class="faq-answer">
+                    <strong>Fact:</strong> Vegetarians can donate blood as long as their iron levels are sufficient. A
+                    balanced diet ensures you are eligible.
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-1">
+            <h2>Ready to be a Hero?</h2>
+            <a href="donor.html" class="btn btn-primary mt-1">Register Now</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Blood - RedLink</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-heartbeat text-primary"></i>
+                <span style="color: black;">Red</span><span class="text-primary">Link</span>
+            </a>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="find-blood.html" class="active">Find Blood</a></li>
+                <li><a href="donor.html">Donate</a></li>
+                <li><a href="emergency.html" style="color: var(--danger); font-weight: bold;">Emergency Request</a></li>
+                <li><a href="inventory.html">Blood Bank</a></li>
+                <li><a href="awareness.html">Awareness</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container section-padding">
+        <h1 class="text-center mb-1">Find Blood Donors</h1>
+        <p class="text-center" style="margin-bottom: 2rem; color: var(--text-light);">Search for eligible donors in your
+            area.</p>
+
+        <!-- Search Filters -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <form id="search-form" class="grid-3" style="align-items: end;">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label">Blood Group</label>
+                    <select class="form-control" id="bg-filter">
+                        <option value="all">All Groups</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label">City</label>
+                    <select class="form-control" id="city-filter">
+                        <option value="all">All Cities</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Coimbatore">Coimbatore</option>
+                        <option value="Madurai">Madurai</option>
+                        <option value="Salem">Salem</option>
+                        <option value="Trichy">Trichy</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="height: 48px;">Search Donors</button>
+            </form>
+        </div>
+
+        <!-- Results -->
+        <div id="results-count" class="mb-1" style="font-weight: 500;"></div>
+        <div id="results-grid" class="grid-3">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            searchDonors();
+        });
+
+        function searchDonors() {
+            const bg = document.getElementById('bg-filter').value;
+            const city = document.getElementById('city-filter').value;
+            const donors = DataManager.getDonors();
+
+            const filtered = donors.filter(d => {
+                const bgMatch = bg === 'all' || d.bloodGroup === bg;
+                const cityMatch = city === 'all' || d.city === city;
+                return bgMatch && cityMatch && d.available; // Only show available
+            });
+
+            const grid = document.getElementById('results-grid');
+            const countDiv = document.getElementById('results-count');
+            grid.innerHTML = '';
+            countDiv.textContent = `Found ${filtered.length} eligible donors`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="card text-center" style="grid-column: 1/-1; padding: 3rem;">
+                        <i class="far fa-frown text-primary" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+                        <h3>No Donors Found</h3>
+                        <p>Try expanding your search or submit an emergency request.</p>
+                        <a href="emergency.html" class="btn btn-primary mt-1">Request Emergency Blood</a>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(d => {
+                const card = document.createElement('div');
+                card.className = 'card animate';
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="margin-bottom: 0.25rem;">${maskName(d.name)}</h3>
+                            <p style="color: var(--text-light); font-size: 0.9rem;"><i class="fas fa-map-marker-alt"></i> ${d.city}</p>
+                        </div>
+                        <div style="background: var(--secondary); color: var(--primary); padding: 0.5rem; border-radius: var(--radius); font-weight: bold;">
+                            ${d.bloodGroup}
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button onclick="contactDonor('${d.id}')" class="btn btn-outline" style="width: 100%; padding: 0.5rem;"><i class="fas fa-phone"></i> Contact</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function maskName(name) {
+            const parts = name.split(' ');
+            return parts[0] + ' ' + (parts[1] ? parts[1][0] + '.' : '');
+        }
+
+        function contactDonor(id) {
+            alert("In a real app, this would reveal contact details or initiate a call via a secure server. For this demo: Donor Contacted!");
+            showToast('Request sent to donor!');
+        }
+
+        // Initial load
+        searchDonors();
+    </script>
+</body>
+
+</html>
